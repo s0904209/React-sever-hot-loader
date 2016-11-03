@@ -16,7 +16,7 @@ var Main = React.createClass({
     render() {
         return (
             <div>
-                <input type="button" onClick={this._toggle} value="Press Me!"/>
+                <input type="button" className="btn btn-danger" onClick={this._toggle} value="Press Me!"/>
                 {this.state.switch ? <TestOne /> : <TestTwo />}
             </div>      
         );
