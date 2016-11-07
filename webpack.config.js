@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var config = {
     entry: ['webpack-dev-server/client?http://localhost:8080',
         'webpack/hot/only-dev-server',
-        path.resolve(__dirname, 'app/app.js')
+        path.resolve(__dirname, 'app/index.js')
     ],
     output: {
         path: path.resolve(__dirname, 'build'),
