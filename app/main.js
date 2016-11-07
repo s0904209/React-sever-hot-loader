@@ -1,57 +1,65 @@
 var React = require('react');
-var TestOne = require('./TestOne.js');
-var TestTwo = require('./TestTwo.js');
 var Fluxxor = require('fluxxor');
+var Bootstrap = require('react-bootstrap');
+var DropdownButton = Bootstrap.DropdownButton;
+var MenuItem = Bootstrap.MenuItem;
+var Grid = Bootstrap.Grid;
+var Col = Bootstrap.Col;
+var Row = Bootstrap.Row;
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 
 var Main = React.createClass({
-    getInitialState: function() {
-        return {
-          switch: true
-        };
-    },
-    _toggle() {
-        this.setState({
-            switch: !this.state.switch
-        });
-    },
+  mixins: [FluxMixin, StoreWatchMixin('store')],
 
-    mixins: [FluxMixin, StoreWatchMixin('store')],
-    componentDidMount: function() {
-        this.props.flux.actions.load();
-    },
+  getInitialState: function() {
+    return {
+      key: 0
+    };
+  },
 
-    getStateFromFlux: function(state) {
-        const flux = this.getFlux();
-        return {
-            data: flux.store("store").getState(),
-        };
-    },
+  componentDidMount: function() {
+    this.props.flux.actions.load();
+  },
 
-    render() {
-        return (
-            <div>
-                <input type="button" className="btn btn-danger" onClick={this._toggle} value="Press Me!"/>
-                {this.state.switch ? <TestOne /> : <TestTwo />}
+  getStateFromFlux: function(state) {
+    const flux = this.getFlux();
+    const data = flux.store("store").getState();
 
-                {this.state.data.map(item => {
-                  return (
-                    <div key={item.name}>
-                        <div>
-                            <strong><span>Find Pharmacy:</span></strong>
-                            <span>{item.name}</span>
-                        </div>
-                        <div>
-                            <strong><span>Address:</span></strong>
-                            <span>{`${item.address1} ${item.address2} ${item.address3} ${item.city} ${item.postcode}`}</span>
-                        </div>
-                    </div>
-                  );
-                })}
-            </div>      
-        );
-    }
+    return {
+      data
+    };
+  },
+
+  render() {
+    const key = this.state.key;
+    const item = this.state.data ? this.state.data[key] : {};
+    const address = item ? item.address1 + ',' + item.address2 + ',' + item.address3 + ',' + item.city + ',' + item.postcode : '';
+    const name = item.name;
+
+    return (
+      <div>
+        <Grid>
+          <Row className="show-grid">
+            <Col sm={6} md={3}>
+              <span>Find Pharmacy:</span>
+                <DropdownButton bsStyle='primary' title={name} id='dropdown-basic'>
+                  {this.state.data.map((item, idx) =>
+                  <MenuItem key={idx} eventKey={idx} onSelect={(key) => this.setState({ key })} >
+                    {`${item.name}`}
+                  </MenuItem>
+                  )}
+                </DropdownButton>
+            </Col>
+            <Col sm={6} md={3}>
+              <span>Address:</span>
+                { address }
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+  }
 });
 
 module.exports = Main;
