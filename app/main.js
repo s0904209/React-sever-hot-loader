@@ -1,9 +1,10 @@
 var React = require('react');
-var TestOne = require('./TestOne.js');
-var TestTwo = require('./TestTwo.js');
+var ReactRouter = require('react-router');
+var browserHistory = ReactRouter.browserHistory;
 var Fluxxor = require('fluxxor');
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
+var $ = require('jquery');
 
 var Main = React.createClass({
     getInitialState: function() {
@@ -20,6 +21,7 @@ var Main = React.createClass({
     mixins: [FluxMixin, StoreWatchMixin('store')],
     componentDidMount: function() {
         this.props.flux.actions.load();
+        $('body').css('background-color', 'pink');
     },
 
     getStateFromFlux: function(state) {
@@ -30,11 +32,10 @@ var Main = React.createClass({
     },
 
     render() {
+        var styles = require('./main.css');
         return (
-            <div>
-                <input type="button" className="btn btn-danger" onClick={this._toggle} value="Press Me!"/>
-                {this.state.switch ? <TestOne /> : <TestTwo />}
-
+            <div className={styles.mainblock}>
+              <h1>Demo1</h1>
                 {this.state.data.map(item => {
                   return (
                     <div key={item.name}>
@@ -49,6 +50,7 @@ var Main = React.createClass({
                     </div>
                   );
                 })}
+                <button className="btn btn-danger btn-lg" onClick={browserHistory.goBack}>BACK TO HOME PAGE</button>
             </div>      
         );
     }

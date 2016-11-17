@@ -5,12 +5,13 @@ var Home = require('./Home.js');
 var mypage = require('./mypage.js');
 var TestOne = require('./TestOne.js');
 var TestTwo = require('./TestTwo.js');
+var mainwrapper = require('./mainwrapper.js');
 
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={Home}>
       <IndexRoute component={mypage} />
-      <Route path="/TestOne" component={TestOne} />
+      <Route path="/TestOne" component={mainwrapper} />
       <Route path="/TestTwo" component={TestTwo} />
     </Route>
   </Router>
