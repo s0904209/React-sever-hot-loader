@@ -3,8 +3,7 @@ var ReactDOM = require('react-dom');
 var { Router, Route, hashHistory, IndexRoute } = require( 'react-router' );
 var Home = require('./Home.js');
 var mypage = require('./mypage.js');
-var TestOne = require('./TestOne.js');
-var TestTwo = require('./TestTwo.js');
+var Second = require('./Second.js');
 var mainwrapper = require('./mainwrapper.js');
 
 ReactDOM.render((
@@ -12,7 +11,7 @@ ReactDOM.render((
     <Route path="/" component={Home}>
       <IndexRoute component={mypage} />
       <Route path="/TestOne" component={mainwrapper} />
-      <Route path="/TestTwo" component={TestTwo} />
+      <Route path="/TestTwo" component={Second} />
     </Route>
   </Router>
 ), document.getElementById('app'));

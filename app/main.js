@@ -49,10 +49,7 @@ var Main = React.createClass({
             <div className={styles.mainblock}>
               <h1>Demo1</h1>
               <div>
-                <Grid>
-                   <Row className="show-grid">
-                     <Col sm={6} md={3}>
-                       <span>Find Pharmacy:</span>
+                       <div><h2>Find Pharmacy:</h2></div>
                          <DropdownButton bsStyle='primary' title={name} id='dropdown-basic'>
                            {this.state.data.map((item, idx) =>
                            <MenuItem key={idx} eventKey={idx} onSelect={(key) => this.setState({ key })} >
@@ -60,13 +57,9 @@ var Main = React.createClass({
                            </MenuItem>
                            )}
                           </DropdownButton>
-                        <div></div>
-                        <span>Address:</span>
-                          { address }
-                      </Col>
-                    </Row>
-                  </Grid>
-                </div>
+                        <div><h2>Address:</h2></div>
+                        <h4>{ address }</h4>
+             </div>
                 <button className="btn btn-danger btn-lg" onClick={browserHistory.goBack}>BACK TO HOME PAGE</button>
             </div>      
         );
