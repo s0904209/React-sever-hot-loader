@@ -1,5 +1,6 @@
 var React = require('react');
-var TestOne = require('./TestOne.js');
+import ReactDom from "react-dom";
+import TestOne from './TestOne.js';
 var TestTwo = require('./TestTwo.js');
 
 var Main = React.createClass({
@@ -23,4 +24,4 @@ var Main = React.createClass({
     }
 });
 
-React.render(<Main />, document.body);
+ReactDom.render(<Main />, document.body);

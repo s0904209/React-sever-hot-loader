@@ -1,14 +1,13 @@
-var React = require('react');
+// var React = require('react');
+import React from "react";
+import styles from "./TestOne";
 
-var TestOne = React.createClass({
+export default class TestOne extends React.Component {
     render() {
-        var styles = require('./TestOne.css');
         return (
             /* jshint ignore: start*/
             <div className={styles.block}>Hello I am Test1 Component</div>
             /* jshint ignore: end*/
-        );
+        )
     }
-});
-
-module.exports = TestOne;
+}
